@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>RecruitPro - Ocrolus</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#1a1a2e}
+    #loading{position:fixed;inset:0;background:#1a1a2e;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#eaeaea;font-family:"Segoe UI",sans-serif;z-index:9999}
+    .sp{width:48px;height:48px;border:4px solid rgba(233,69,96,.2);border-top:4px solid #e94560;border-radius:50%;animation:spin .8s linear infinite;margin-bottom:20px}
+    .lo{font-size:24px;font-weight:700;margin-bottom:8px}.lo span{color:#e94560}
+    .su{font-size:13px;color:#8892a4}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <div class="sp"></div>
+    <div class="lo">Recruit<span>Pro</span></div>
+    <div class="su" id="st">Loading React...</div>
+  </div>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+
+  <!-- App JS hosted on GitHub via jsDelivr CDN -->
+  <!-- REPLACE YOUR_GITHUB_USERNAME below after uploading recruitpro-app.js to GitHub -->
+  <script
+    src="https://cdn.jsdelivr.net/gh/mmandel-gif/recruitpro1@main/recruitpro-app.js"
+    onload="mountApp()"
+    onerror="document.getElementById('st').textContent='Failed to load app JS. Check GitHub URL.'">
+  </script>
+
+  <script>
+    function mountApp() {
+      try {
+        document.getElementById('st').textContent = 'Starting app...';
+        if (typeof App === 'undefined') throw new Error('App not defined');
+        ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+        document.getElementById('loading').style.display = 'none';
+      } catch(e) {
+        document.getElementById('st').textContent = 'Error: ' + e.message;
+        console.error(e);
+      }
+    }
+  </script>
+</body>
+</html>
